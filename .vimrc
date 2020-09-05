@@ -29,4 +29,3 @@ syntax on
 "Search                                                                            
 :set incsearch                  " search as you type out                           
 :set hlsearch                   " highlight search   
-:set number 			 "to view line numbers
