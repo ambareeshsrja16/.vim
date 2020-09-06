@@ -1,7 +1,7 @@
 "PluginManager
 "Pathogen
-"execure pathogen#infect()
-
+"execute pathogen#infect()       
+                                " install pathogen plugin manager if version <8
 "Basic
 filetype indent plugin on       " turn on filetype based indenting and syntax highlighting 
 syntax on                                                                          
