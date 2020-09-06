@@ -1,6 +1,6 @@
 "PluginManager
 "Pathogen
-"execute pathogen#infect()       
+execute pathogen#infect()
                                 " install pathogen plugin manager if version <8
 "Basic
 filetype indent plugin on       " turn on filetype based indenting and syntax highlighting 
@@ -31,3 +31,9 @@ syntax on
 "Search                                                                            
 :set incsearch                  " search as you type out                           
 :set hlsearch                   " highlight search   
+
+"$MYVIMRC edits
+:let mapleader = "\<Space>"     "map <leader>, map edit and source $MYVIMRC
+:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+
