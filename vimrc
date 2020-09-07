@@ -37,6 +37,15 @@ syntax on
 :set incsearch                  " search as you type out
 :set hlsearch                   " highlight search
 
+"Splits
+:nnoremap <C-J> <C-W><C-J>
+:nnoremap <C-K> <C-W><C-K>
+:nnoremap <C-L> <C-W><C-L>
+:nnoremap <C-H> <C-W><C-H>
+" navigation
+:set splitbelow                 " natural splitting
+:set splitright
+
 "$MYVIMRC edits
 :let mapleader = "\<Space>"     "map <leader>, map edit and source $MYVIMRC
 :nnoremap <leader>ev :split $MYVIMRC<cr>
