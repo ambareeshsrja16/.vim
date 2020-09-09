@@ -21,6 +21,7 @@ syntax on
 :set textwidth=80               " go to next line after crossing desired number of characters
 :set cursorline                 " highlight current line
 :set cursorcolumn               " highlight current column
+:highlight CursorColumn ctermbg=Blue
 :set showmatch                  " highlight matching ({})
 
 "Spaces and Tab
