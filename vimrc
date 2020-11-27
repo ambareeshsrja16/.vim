@@ -1,6 +1,7 @@
 "-------------------------------PLUGIN_MANAGER---------------------------------
 
 "Pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 " install pathogen plugin manager if version <8
 
@@ -12,16 +13,23 @@ syntax on
 :set wildmenu                   " auto complete in command-line mode
 :set wildmode=longest:full,full
 
+:set noswapfile
+" :set wrap
+" :set linebreak
+
+:set background=dark
+:set t_Co=256
+
 "UI
 :set number                     " view line numbers
-:set relativenumber
+:set norelativenumber
 :set showcmd                    " show commands in bottom right corner
 :set ruler                      " show line/column information in bottom right corner
 :set colorcolumn=80             " draw red line vertically at desired column
-:set textwidth=80               " go to next line after crossing desired number of characters
+" :set textwidth=80              " go to next line after crossing desired number of characters
 :set cursorline                 " highlight current line
 :set cursorcolumn               " highlight current column
-:highlight CursorColumn ctermbg=Blue
+:highlight CursorColumn ctermbg=Brown
 :set showmatch                  " highlight matching ({})
 
 "Spaces and Tab
@@ -52,25 +60,43 @@ syntax on
 :nnoremap <leader>ev :split $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 
+"-------------------------------EDITING----------------------------------------
+
+"delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+"replace currently selected text with default register without yanking it
+vnoremap <leader>p "_dP
 
 "-------------------------------PLUGINS----------------------------------------
 
-"vim-autoformat
-:noremap <F3> :Autoformat<CR>
-
-"syntastic
-:set statusline+=%#warningmsg#
-:set statusline+=%{SyntasticStatuslineFlag()}
-:set statusline+=%*
-
-:let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-:let g:syntastic_check_on_open = 1
-:let g:syntastic_check_on_wq = 0
+"Git repo should contain these plugins:
+"*vim-pathogen
+"*vim-commentary
+"*vim-surround
+"*ctrlP
+"*Tagbar
 
 "commentary
 :autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 :noremap <leader>/ :Commentary<cr>
 "change comment style to // inplace of /* */
+
+"CtrlP
+:nnoremap <leader>. :CtrlPTag<cr>
+:let g:ctrlp_open_multiple_files = '1r'
+
+"Tagbar
+nnoremap <silent> <leader>b :TagbarToggle<CR>
+
+"ctags
+" command! Gentags execute '!git ls-files | grep -E "\.(cpp|hpp|proto)$" | ctags -–extra=+q -L -'
+command! Gentags execute '!git ls-files | grep -E "\.(hpp|cpp|proto)$" | ctags --c++-kinds=+p --extra=+q -L -'
+":Gentags to create tags
+
+"Clang
+" map <leader>k :py3f ~/thoughtspot/git_scripts/clang-format.py<CR>
+" map <leader>k :pyf ~/thoughtspot/git_scripts/clang-format.py<CR>
+map <leader>k :pyf ~/clang-format.py<CR>
 
 "------------------------------EXPERIMENTS-------------------------------------
