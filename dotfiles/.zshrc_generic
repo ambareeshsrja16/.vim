@@ -74,6 +74,7 @@ COMPLETION_WAITING_DOTS="true"
 # Ambar: zsh-syntax-highlighting should be the last plugin
 plugins=(
   git
+  sudo
   colored-man-pages
   web-search
   # tmux
