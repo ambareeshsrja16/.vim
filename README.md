@@ -15,5 +15,6 @@ USAGE
   * Copy .tmux.conf from .vim/dotfiles to ~
   * Open tmux and activate plugins with:
   `prefix I`
+  * Uncomment `tmux' from .zshrc plugin list
 
 Details: [Synchronizing plugins with git submodules and pathogen](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen)

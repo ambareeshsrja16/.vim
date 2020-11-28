@@ -76,7 +76,7 @@ plugins=(
   git
   colored-man-pages
   web-search
-  tmux
+  # tmux
   vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting)
