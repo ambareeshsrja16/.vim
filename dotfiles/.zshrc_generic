@@ -76,6 +76,9 @@ plugins=(
   git
   colored-man-pages
   web-search
+  sudo
+  z
+  common-aliases
   tmux
   vi-mode
   zsh-autosuggestions
