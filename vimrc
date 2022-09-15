@@ -99,4 +99,6 @@ command! Gentags execute '!git ls-files | grep -E "\.(hpp|cpp|proto)$" | ctags -
 " map <leader>k :pyf ~/thoughtspot/git_scripts/clang-format.py<CR>
 map <leader>k :pyf ~/clang-format.py<CR>
 
+"Autoformat
+noremap <leader>p :Autoformat<CR>
 "------------------------------EXPERIMENTS-------------------------------------
