@@ -74,6 +74,7 @@ vnoremap <leader>p "_dP
 "*vim-pathogen
 "*vim-commentary
 "*vim-surround
+"*vim-autoformat
 "*ctrlP
 "*Tagbar
 
@@ -85,6 +86,8 @@ vnoremap <leader>p "_dP
 "CtrlP
 :nnoremap <leader>. :CtrlPTag<cr>
 :let g:ctrlp_open_multiple_files = '1r'
+" let g:ctrlp_max_files=0
+" let g:ctrlp_max_depth=8
 
 "Tagbar
 nnoremap <silent> <leader>b :TagbarToggle<CR>
