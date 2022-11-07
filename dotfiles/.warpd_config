@@ -1,0 +1,16 @@
+left: j
+down: k 
+up: i 
+right: l
+
+hint_activation_key: C-j
+grid_activation_key: C-k
+activation_key: C-l
+screen_activation_key: C-;
+
+exit: [
+
+buttons: f d s
+
+scroll_down: h
+scroll_up: y
