@@ -17,4 +17,8 @@ USAGE
   `prefix I`
   * Uncomment `tmux` from .zshrc plugin list
 
+4. Warpd
+  * Copy ./vim/dotfiles/.warpd_config to ~/.config/warpd/config (after
+  installing warpd)
+
 Details: [Synchronizing plugins with git submodules and pathogen](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen)
