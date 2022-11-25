@@ -3,15 +3,15 @@ down: k
 up: i 
 right: l
 
-#hint_activation_key: C-j
-#grid_activation_key: C-k
-#activation_key: C-l
-#screen_activation_key: C-;
+hint_activation_key: M-C-j
+grid_activation_key: M-C-k
+activation_key: M-C-l
+screen_activation_key: M-C-;
 
-hint_activation_key: C-m
-grid_activation_key: C-,
-activation_key: C-.
-screen_activation_key: C-/
+#hint_activation_key: C-m
+#grid_activation_key: C-,
+#activation_key: C-.
+#screen_activation_key: C-/
 
 exit: [
 

@@ -31,6 +31,7 @@ syntax on
 :set cursorcolumn               " highlight current column
 :highlight CursorColumn ctermbg=Brown
 :set showmatch                  " highlight matching ({})
+:set listchars=tab:▸\ ,eol:¬    " make tabs and eol readable
 
 "Spaces and Tab
 :set tabstop=4                  " number of visual spaces per tab
@@ -87,7 +88,7 @@ vnoremap <leader>p "_dP
 :nnoremap <leader>. :CtrlPTag<cr>
 :let g:ctrlp_open_multiple_files = '1r'
 " let g:ctrlp_max_files=0
-" let g:ctrlp_max_depth=8
+" let g:ctrlp_max_depth=12
 
 "Tagbar
 nnoremap <silent> <leader>b :TagbarToggle<CR>
