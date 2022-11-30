@@ -105,4 +105,7 @@ map <leader>k :pyf ~/clang-format.py<CR>
 
 "Autoformat
 noremap <leader>p :Autoformat<CR>
+
 "------------------------------EXPERIMENTS-------------------------------------
+"For table-mode, using Vim8+ packages
+:packloadall
