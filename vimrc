@@ -87,6 +87,7 @@ vnoremap <leader>p "_dP
 "CtrlP
 :nnoremap <leader>. :CtrlPTag<cr>
 :let g:ctrlp_open_multiple_files = '1r'
+"uncomment when you need good searchabilty in deep repos
 " let g:ctrlp_max_files=0
 " let g:ctrlp_max_depth=12
 
