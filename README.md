@@ -2,6 +2,8 @@ USAGE
 
 1. Clone repo, go to .vim and init submodules/plugins with:
   `git submodule update --init`
+    OR
+  `git clone --recurse-submodules https://www.github.com/ambareeshsrja16/.vim.git`
 
 2. Shell
   * Install zsh
