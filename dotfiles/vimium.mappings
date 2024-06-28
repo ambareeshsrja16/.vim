@@ -1,0 +1,5 @@
+# Insert your preferred key mappings here.
+map <c-p> togglePinTab
+map gx0 closeTabsOnLeft
+map gx$ closeTabsOnRight
+
