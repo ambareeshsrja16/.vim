@@ -22,3 +22,6 @@
 [submodule "pack/tpope/start/repeat"]
 	path = pack/tpope/start/repeat
 	url = https://tpope.io/vim/repeat.git
+[submodule "pack/tpope/start/vim-abolish"]
+	path = pack/tpope/start/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
