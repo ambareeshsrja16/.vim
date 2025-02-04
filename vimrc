@@ -110,3 +110,6 @@ noremap <leader>p :Autoformat<CR>
 "------------------------------EXPERIMENTS-------------------------------------
 "For table-mode, using Vim8+ packages
 :packloadall
+
+"For changing pwd to dir of file in buffer
+:nnoremap <leader>cd :cd %:p:h<CR>
