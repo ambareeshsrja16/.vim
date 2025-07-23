@@ -107,9 +107,12 @@ map <leader>k :pyf ~/clang-format.py<CR>
 "Autoformat
 noremap <leader>p :Autoformat<CR>
 
-"------------------------------EXPERIMENTS-------------------------------------
 "For table-mode, using Vim8+ packages
 :packloadall
 
+"------------------------------EXPERIMENTS-------------------------------------
 "For changing pwd to dir of file in buffer
 :nnoremap <leader>cd :cd %:p:h<CR>
+
+"Set textwidth for commit message editing
+:autocmd FileType gitcommit setlocal textwidth=60
