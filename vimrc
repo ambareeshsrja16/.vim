@@ -69,6 +69,11 @@ vnoremap <leader>d "_d
 "replace currently selected text with default register without yanking it
 vnoremap <leader>p "_dP
 
+"-------------------------------TEXT WRAPPING----------------------------------
+"Wrap word with backticks (for inline code in markdown)
+nmap <leader>w ysiw`         " Wrap word with backticks
+nmap <leader>W ysiW`         " Wrap WORD with backticks
+
 "-------------------------------PLUGINS----------------------------------------
 
 "Git repo should contain these plugins:
