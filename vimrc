@@ -86,6 +86,7 @@ nmap <leader>W ysiW`         " Wrap WORD with backticks
 
 "commentary
 :autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+:autocmd FileType tla,tlaplus setlocal commentstring=\\*\ %s
 :noremap <leader>/ :Commentary<cr>
 "change comment style to // inplace of /* */
 
