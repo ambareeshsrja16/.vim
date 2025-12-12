@@ -139,7 +139,9 @@ function! TlaIndent()
 
   " /\ \/ : matching
   " Match indentation to /\ with same region
-  let logic_col = s:LineMatchesSyntaxWithRegion(previousNum, "tlaBinaryOperator", s:SyntaxRegionsAt(line('.'), col('.')))
+  " let logic_col = s:LineMatchesSyntaxWithRegion(previousNum, "tlaBinaryOperator", s:SyntaxRegionsAt(line('.'), col('.')))
+  " AMBAR - Relaxed match: ignore region stack to ensure alignment works in nested scopes (e.g. LET/IN)
+  let logic_col = s:LineMatchesSyntax(previousNum, "tlaBinaryOperator")
   if logic_col
     return logic_col - 1
   endif
