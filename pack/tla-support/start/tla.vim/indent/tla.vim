@@ -137,9 +137,69 @@ function! TlaIndent()
     return 0
   endif
 
+  " LET/IN handling
+  let current_trimmed = substitute(line, '^\s*', '', '')
+  let prev_line = getline(previousNum)
+  let prev_trimmed = substitute(prev_line, '^\s*', '', '')
+
+  " Current line starts with IN -> align with matching LET
+  if current_trimmed =~# '^IN\>'
+    for lnum in reverse(range(1, v:lnum - 1))
+      let l = getline(lnum)
+      if l =~# '\<LET\>'
+        return match(l, '\<LET\>')
+      endif
+    endfor
+    return indent(previousNum)
+  endif
+
+  " Previous line contains LET -> indent into LET definitions
+  if prev_line =~# '\<LET\>'
+    let let_col = match(prev_line, '\<LET\>')
+    " Check if LET has a definition on the same line (LET x == ...)
+    if matchstr(prev_line, '\<LET\>\s*\zs\S.*') !=# ''
+      return let_col + 4
+    else
+      return let_col + &shiftwidth
+    endif
+  endif
+
   " /\ \/ : matching
-  " Match indentation to /\ with same region
-  " let logic_col = s:LineMatchesSyntaxWithRegion(previousNum, "tlaBinaryOperator", s:SyntaxRegionsAt(line('.'), col('.')))
+  " If current line starts with /\ or \/, find the SAME operator above
+  " so that \/ aligns with \/ and /\ aligns with /\
+  " Stop searching at LET/IN scope boundaries to avoid escaping to outer scope
+  let cur_op = strpart(current_trimmed, 0, 2)
+  if cur_op ==# '/\' || cur_op ==# '\/'
+    for lnum in range(previousNum, max([1, previousNum - 100]), -1)
+      if getline(lnum) =~# '^\s*$'
+        break
+      endif
+      let col = stridx(getline(lnum), cur_op)
+      if col >= 0
+        return col
+      endif
+      " Stop at LET/IN scope boundaries (checked after operator so we can
+      " still match operators ON the IN line, e.g. IN /\ \/)
+      if getline(lnum) =~# '\<LET\>\|\<IN\>'
+        break
+      endif
+    endfor
+  endif
+
+  " Previous line starts with IN -> indent the IN body
+  " Placed after operator matching so IN /\ \/ lines are handled by operator search
+  if prev_trimmed =~# '^IN\>'
+    let in_col = match(prev_line, '\<IN\>')
+    if matchstr(prev_line, '\<IN\>\s*\zs\S.*') !=# ''
+      " IN has content on same line (IN \E ...) -> align to after "IN  "
+      return in_col + 4
+    else
+      " IN alone on line -> indent by shiftwidth
+      return in_col + &shiftwidth
+    endif
+  endif
+
+  " Fall back: match indentation to first /\ or \/ on previous line
   " AMBAR - Relaxed match: ignore region stack to ensure alignment works in nested scopes (e.g. LET/IN)
   let logic_col = s:LineMatchesSyntax(previousNum, "tlaBinaryOperator")
   if logic_col
