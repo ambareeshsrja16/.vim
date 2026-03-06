@@ -164,6 +164,16 @@ function! TlaIndent()
     endif
   endif
 
+  " Previous line ends with : (quantifier \E/\A body) -> indent past quantifier
+  " Aligns body to quant_col + 3 (past "\E " or "\A "), matching Lamport's style
+  if prev_trimmed =~# ':\s*$'
+    let quant_col = match(prev_line, '\\[EA]\>')
+    if quant_col >= 0
+      return quant_col + 3
+    endif
+    return indent(previousNum) + &shiftwidth
+  endif
+
   " /\ \/ : matching
   " If current line starts with /\ or \/, find the SAME operator above
   " so that \/ aligns with \/ and /\ aligns with /\
