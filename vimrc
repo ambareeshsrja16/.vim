@@ -1,12 +1,3 @@
-"-------------------------------PLUGIN_MANAGER---------------------------------
-
-"Pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-" install pathogen plugin manager if version <8
-
-"------------------------------------------------------------------------------
-
 "Basic
 filetype indent plugin on       " turn on filetype based indenting and syntax highlighting
 syntax on
@@ -76,29 +67,21 @@ nmap <leader>W ysiW`         " Wrap WORD with backticks
 
 "-------------------------------PLUGINS----------------------------------------
 
-"Git repo should contain these plugins:
-"*vim-pathogen
+"Git repo should contain these plugins (pack/*/start/):
 "*vim-commentary
 "*vim-surround
+"*vim-unimpaired
 "*vim-autoformat
-"*ctrlP
-"*Tagbar
+"*vim-abolish
+"*repeat
+"*vim-table-mode
+"*tla.vim (vendored)
 
 "commentary
 :autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 :autocmd FileType tla,tlaplus setlocal commentstring=\\*\ %s
 :noremap <leader>/ :Commentary<cr>
 "change comment style to // inplace of /* */
-
-"CtrlP
-:nnoremap <leader>. :CtrlPTag<cr>
-:let g:ctrlp_open_multiple_files = '1r'
-"uncomment when you need good searchabilty in deep repos
-" let g:ctrlp_max_files=0
-" let g:ctrlp_max_depth=12
-
-"Tagbar
-nnoremap <silent> <leader>b :TagbarToggle<CR>
 
 "ctags
 " command! Gentags execute '!git ls-files | grep -E "\.(cpp|hpp|proto)$" | ctags -–extra=+q -L -'
@@ -113,7 +96,7 @@ map <leader>k :pyf ~/clang-format.py<CR>
 "Autoformat
 noremap <leader>p :Autoformat<CR>
 
-"For table-mode, using Vim8+ packages
+"Load all Vim8+ packages from pack/*/start/
 :packloadall
 
 "------------------------------EXPERIMENTS-------------------------------------

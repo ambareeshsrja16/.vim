@@ -22,27 +22,20 @@ git clone --recurse-submodules https://www.github.com/ambareeshsrja16/.vim.git
 
 ## Plugin Management
 
-Plugins are managed in two ways:
+Plugins are managed via **Vim 8 native packages** (`pack/*/start/`), loaded by `:packloadall` in `vimrc`. All plugins are git submodules.
 
-- **Pathogen** (`bundle/vim-pathogen`): loads plugins from `bundle/`. All directories under `bundle/` are on the Vim `runtimepath`.
-- **Vim 8 native packages** (`pack/`): loaded via `:packloadall` in `vimrc`. Subdirectories follow the `pack/{name}/start/` convention.
-
-To add a new plugin as a submodule:
+To add a new plugin:
 
 ```sh
-# Pathogen-managed (bundle/)
-git submodule add <url> bundle/<plugin-name>
-
-# Native package (pack/)
 git submodule add <url> pack/<namespace>/start/<plugin-name>
 ```
+
+Tpope plugins go under `pack/tpope/start/`, others under `pack/plugins/start/`.
 
 ## Structure
 
 - `vimrc` — main Vim configuration; all mappings, settings, plugin config
-- `bundle/` — Pathogen-managed plugins (submodules)
-- `pack/` — Vim 8 native packages (submodules); includes `tla-support/start/tla.vim` for TLA+ filetype support
-- `autoload/pathogen.vim` — Pathogen plugin manager (vendored)
+- `pack/` — Vim 8 native packages (submodules); includes `tla-support/start/tla.vim` (vendored) for TLA+ filetype support
 - `spell/` — custom spell files
 - `dotfiles/` — supplementary configs (`.zshrc_generic`, `.tmux.conf`, `.warpd_config`, `vimium.mappings`) to be copied to `~`
 
@@ -52,8 +45,6 @@ git submodule add <url> pack/<namespace>/start/<plugin-name>
 |---|---|
 | `<leader>ev` / `<leader>sv` | Edit / source `$MYVIMRC` |
 | `<leader>/` | Toggle comment (vim-commentary) |
-| `<leader>.` | CtrlP tag search |
-| `<leader>b` | Toggle Tagbar |
 | `<leader>k` | Run clang-format via `~/clang-format.py` |
 | `<leader>w` / `<leader>W` | Wrap word/WORD with backticks (vim-surround) |
 | `<leader>d` | Delete without yanking |
