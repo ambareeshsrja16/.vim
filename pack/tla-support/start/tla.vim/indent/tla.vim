@@ -14,7 +14,7 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 setlocal indentexpr=TlaIndent()
-setlocal indentkeys+=<:>,=end,=begin,=do,=or
+setlocal indentkeys+=<:>,=end,=begin,=do,=or,=THEN,=ELSE
 "setlocal
  
 let s:tla_open_scopes = [] " LET-IN, IF-THEN, CASE
@@ -172,6 +172,53 @@ function! TlaIndent()
       return quant_col + 3
     endif
     return indent(previousNum) + &shiftwidth
+  endif
+
+  " IF/THEN/ELSE handling
+  " Current line starts with THEN -> align to matching IF + 3 (past "IF ")
+  if current_trimmed =~# '^THEN\>'
+    for lnum in range(previousNum, max([1, previousNum - 100]), -1)
+      let l = getline(lnum)
+      if l =~# '^\s*$'
+        break
+      endif
+      if l =~# '\<IF\>'
+        return match(l, '\<IF\>') + 3
+      endif
+    endfor
+    return indent(previousNum)
+  endif
+
+  " Current line starts with ELSE -> align with matching THEN (depth-aware
+  " to skip nested THEN/ELSE pairs)
+  if current_trimmed =~# '^ELSE\>'
+    let ite_depth = 0
+    for lnum in range(previousNum, max([1, previousNum - 100]), -1)
+      let l = getline(lnum)
+      if l =~# '^\s*$'
+        break
+      endif
+      if l =~# '\<ELSE\>'
+        let ite_depth += 1
+      endif
+      if l =~# '\<THEN\>'
+        if ite_depth == 0
+          return match(l, '\<THEN\>')
+        endif
+        let ite_depth -= 1
+      endif
+    endfor
+    return indent(previousNum)
+  endif
+
+  " Previous line is standalone THEN -> indent body past "THEN " (col + 5)
+  if prev_trimmed =~# '^THEN\s*$'
+    return match(prev_line, '\<THEN\>') + 5
+  endif
+
+  " Previous line is standalone ELSE -> indent body past "ELSE " (col + 5)
+  if prev_trimmed =~# '^ELSE\s*$'
+    return match(prev_line, '\<ELSE\>') + 5
   endif
 
   " /\ \/ : matching

@@ -51,3 +51,12 @@ Tpope plugins go under `pack/tpope/start/`, others under `pack/plugins/start/`.
 | `<leader>p` | Replace selection without yanking |
 | `<leader>cd` | Set cwd to directory of current file |
 | `:Gentags` | Generate ctags for `.hpp`, `.cpp`, `.proto` files |
+
+## TLA+ Indentation Development
+
+When working on TLA+ indentation improvements in `pack/tla-support/start/tla.vim/indent/tla.vim`, refer to the local formatting corpus before fetching external examples:
+
+- `pack/tla-support/start/tla.vim/reference/tla-formatting-rules.md` — distilled alignment rules for IF/THEN/ELSE, `/\` `\/`, LET/IN, `\E`/`\A`, CASE/OTHER, records
+- `pack/tla-support/start/tla.vim/reference/tla-formatting-examples.md` — real code snippets from canonical specs (Paxos, FastMutex, Bakery, EWD998, bcastByz, LamportMutex)
+
+These files contain formatting conventions derived from Lamport's specs and the tlaplus/Examples repository. Known gaps are listed at the bottom of the rules file.
