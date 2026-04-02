@@ -142,6 +142,23 @@ function! TlaIndent()
   let prev_line = getline(previousNum)
   let prev_trimmed = substitute(prev_line, '^\s*', '', '')
 
+  " CONSTANT(S)/VARIABLE(S) continuation: align past keyword when prev ends
+  " with ',' (ignoring \* comments). Searches backward through comma-ending
+  " lines to find the keyword, then aligns to keyword_col + len(keyword) + 1.
+  if prev_trimmed =~# ',\s*\(\\\*.*\)\?$'
+    for lnum in range(previousNum, max([1, previousNum - 50]), -1)
+      let l = getline(lnum)
+      let kw = matchstr(l, '\<\(CONSTANTS\?\|VARIABLES\?\)\>')
+      if kw !=# ''
+        return match(l, '\<\(CONSTANTS\?\|VARIABLES\?\)\>') + len(kw) + 1
+      endif
+      let lt = substitute(l, '^\s*', '', '')
+      if lt !~# ',\s*\(\\\*.*\)\?$'
+        break
+      endif
+    endfor
+  endif
+
   " Current line starts with IN -> align with matching LET
   if current_trimmed =~# '^IN\>'
     for lnum in reverse(range(1, v:lnum - 1))
