@@ -47,7 +47,8 @@ endfunction
 function! s:LineMatchesSyntax(linenum, match)
   let columns = len(getline(a:linenum))
   for i in range(1, columns)
-    if s:SyntaxStackAt(a:linenum, i)[-1] ==# a:match
+    let stack = s:SyntaxStackAt(a:linenum, i)
+    if len(stack) > 0 && stack[-1] ==# a:match
       return i
     end if
   endfor
@@ -60,7 +61,8 @@ endfunction
 function! s:LineMatchesSyntaxWithRegion(linenum, match, regions)
   let columns = len(getline(a:linenum))
   for i in range(1, columns)
-    if s:SyntaxStackAt(a:linenum, i)[-1] ==# a:match && s:SyntaxRegionsAt(a:linenum, i) == a:regions
+    let stack = s:SyntaxStackAt(a:linenum, i)
+    if len(stack) > 0 && stack[-1] ==# a:match && s:SyntaxRegionsAt(a:linenum, i) == a:regions
       return i
     end if
   endfor
@@ -242,7 +244,15 @@ function! TlaIndent()
   " If current line starts with /\ or \/, find the SAME operator above
   " so that \/ aligns with \/ and /\ aligns with /\
   " Stop searching at LET/IN scope boundaries to avoid escaping to outer scope
+  " If the current line is still blank (e.g. indent is being computed right
+  " after pressing Enter, before anything has been typed), infer the operator
+  " from the previous line instead, so a fresh continuation line still aligns.
+  " This also sidesteps relying on synstack()/syntax highlighting here, which
+  " can be stale immediately after typing and give the wrong column.
   let cur_op = strpart(current_trimmed, 0, 2)
+  if cur_op !=# '/\' && cur_op !=# '\/'
+    let cur_op = strpart(prev_trimmed, 0, 2)
+  endif
   if cur_op ==# '/\' || cur_op ==# '\/'
     for lnum in range(previousNum, max([1, previousNum - 100]), -1)
       if getline(lnum) =~# '^\s*$'
